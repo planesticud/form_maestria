@@ -9,7 +9,7 @@ const buildPath = path.join(__dirname, '..', 'build');
 app.use(express.json());
 app.use(express.static(buildPath));
 
-app.post('/send', (req, res) => {
+app.post('/form/send', (req, res) => {
   try {
     const mailOptions = {
       from: req.body.email, // sender address
