@@ -15,7 +15,7 @@ const ContactForm = () => {
   const sendEmail = event => {
     event.preventDefault();
     axios
-      .post('/send', { ...state })
+      .post('/form/send', { ...state })
       .then(response => {
         setResult(response.data);
         setState({
