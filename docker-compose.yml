@@ -1,0 +1,24 @@
+version: '3'
+networks:
+ campus_virtual:
+
+services:
+  form-maestria:
+     build: .
+     container_name: form-maestria
+     restart: on-failure
+     env_file:
+        - .env
+     networks:
+        - udrepcampus_virtualository
+     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.form-maestria.rule=Host(`pages.planestic.udistrita.edu.co`) && PathPrefix(`/form`)"
+      - "traefik.http.routers.form-maestria.middlewares=form-maestria-stripprefix"
+      - "traefik.http.middlewares.form-maestria-stripprefix.stripprefix.prefixes=/form"
+      - "traefik.http.routers.form-maestria.tls=true"
+      - "traefik.http.routers.form-maestria.tls.certresolver=le"
+      - "traefik.http.services.form-maestria.loadbalancer.server.port=3030"           
+networks:
+  campus_virtual:
+    external: true
